@@ -229,5 +229,5 @@ def drop_negative_values(fbs: FlowBySector, **_) -> FlowBySector:
 
 if __name__ == '__main__':
     import flowsa
-    flowsa.generateflowbyactivity.main(source='EPA_StateGHGI', year='2012-2022')
-    fba = flowsa.flowbyactivity.getFlowByActivity('EPA_StateGHGI', '2020')
+    flowsa.generateflowbyactivity.main(source='EPA_StateGHGI', year='2023')
+    fba = flowsa.flowbyactivity.getFlowByActivity('EPA_StateGHGI', '2023')
