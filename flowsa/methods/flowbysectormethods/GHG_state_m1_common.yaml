@@ -30,8 +30,8 @@ source_names:
     fedefl_mapping: GHGI_AR5_100
     activity_sets:
       direct:
-      # replicates direct attribution from EPA_GHGI_T_2_1, EPA_GHGI_T_4_103,
-      # and EPA_GHGI_T_4_121
+      # replicates direct attribution from EPA_GHGI_T_2_1, EPA_GHGI_T_4_100,
+      # and EPA_GHGI_T_4_118
         selection_fields:
           PrimaryActivity: !from_index:EPA_StateGHGI_asets.csv direct
         attribution_method: direct
@@ -44,7 +44,7 @@ source_names:
         clean_fba_before_mapping: !script_function:EPA_GHGI split_HFCs_by_type
         clean_parameter:
             # Proportions of specific HFCs are assigned based on national total
-            flow_fba: EPA_GHGI_T_4_125
+            flow_fba: EPA_GHGI_T_4_122
         attribution_method: direct
       direct_ods2:
         selection_fields:
@@ -62,12 +62,12 @@ source_names:
           PrimaryActivity: !from_index:EPA_StateGHGI_asets.csv petrochemicals
         attribution_method: direct
       ag_livestock: #CH4 from Enteric Fermentation, CH4, N2O from manure
-      # replicates EPA_GHGI_T_5_3 and EPA_GHGI_T_5_6
+      # replicates EPA_GHGI_T_5_3 and EPA_GHGI_T_5_7
         selection_fields:
           PrimaryActivity: !from_index:EPA_StateGHGI_asets.csv ag_livestock
         attribution_method: direct
       ag_burning: #CH4, N2O, CO and NOx from field burning of residue
-      # replicates EPA_GHGI_T_5_28
+      # replicates EPA_GHGI_T_5_29
         selection_fields:
           PrimaryActivity: !from_index:EPA_StateGHGI_asets.csv ag_burning
         attribution_method: direct
@@ -180,9 +180,9 @@ source_names:
       ng_systems:
         selection_fields:
           MetaSources:
-            - 'EPA_GHGI_T_3_73'
-            - 'EPA_GHGI_T_3_75'
-            - 'EPA_GHGI_T_3_77'
+            - 'EPA_GHGI_T_3_64'
+            - 'EPA_GHGI_T_3_66'
+            - 'EPA_GHGI_T_3_68'
         attribution_method: proportional
         attribute_on: ['Flowable', 'SectorProducedBy']
         fill_columns: Location
@@ -196,9 +196,9 @@ source_names:
       pet_systems:
         selection_fields:
           MetaSources:
-            - 'EPA_GHGI_T_3_44'
-            - 'EPA_GHGI_T_3_46'
-            - 'EPA_GHGI_T_3_48'
+            - 'EPA_GHGI_T_3_45'
+            - 'EPA_GHGI_T_3_47'
+            - 'EPA_GHGI_T_3_49'
         attribution_method: proportional
         attribute_on: ['Flowable', 'SectorProducedBy']
         fill_columns: Location
@@ -213,9 +213,9 @@ source_names:
       n2o_soil_direct:
         selection_fields:
           MetaSources:
-            - 'EPA_GHGI_T_5_17.fertilizer_use'
-            - 'EPA_GHGI_T_5_17.cropland'
-            - 'EPA_GHGI_T_5_17.pasture'
+            - 'EPA_GHGI_T_5_18.fertilizer_use'
+            - 'EPA_GHGI_T_5_18.cropland'
+            - 'EPA_GHGI_T_5_18.pasture'
         attribution_method: proportional
         attribute_on: ['Flowable', 'SectorProducedBy']
         fill_columns: Location
@@ -229,8 +229,8 @@ source_names:
       n2o_soil_indirect:
         selection_fields:
           MetaSources:
-            - 'EPA_GHGI_T_5_18.fertilizer_use'
-            - 'EPA_GHGI_T_5_18.pasture'
+            - 'EPA_GHGI_T_5_19.fertilizer_use'
+            - 'EPA_GHGI_T_5_19.pasture'
         attribution_method: proportional
         attribute_on: ['Flowable', 'SectorProducedBy']
         fill_columns: Location
@@ -530,14 +530,14 @@ source_names:
       industrial_neu:
         selection_fields:
           MetaSources:
-            - 'EPA_GHGI_T_3_24.coal'
-            - 'EPA_GHGI_T_3_24.petroleum_neu'
-            - 'EPA_GHGI_T_3_24.natural_gas_neu'
-            - 'EPA_GHGI_T_3_24.transportation_lubricants'
-            - 'EPA_GHGI_T_3_24b.coal'
-            - 'EPA_GHGI_T_3_24b.petroleum_neu'
-            - 'EPA_GHGI_T_3_24b.natural_gas_neu'
-            - 'EPA_GHGI_T_3_24b.transportation_lubricants'
+            - 'EPA_GHGI_T_3_25.coal'
+            - 'EPA_GHGI_T_3_25.petroleum_neu'
+            - 'EPA_GHGI_T_3_25.natural_gas_neu'
+            - 'EPA_GHGI_T_3_25.transportation_lubricants'
+            - 'EPA_GHGI_T_3_25b.coal'
+            - 'EPA_GHGI_T_3_25b.petroleum_neu'
+            - 'EPA_GHGI_T_3_25b.natural_gas_neu'
+            - 'EPA_GHGI_T_3_25b.transportation_lubricants'
         attribution_method: proportional
         attribute_on: ['Flowable', 'SectorProducedBy']
         fill_columns: Location
@@ -551,10 +551,10 @@ source_names:
       ods_substitutes:
         selection_fields:
           MetaSources:
-            - 'EPA_GHGI_T_4_127.households'
-            - 'EPA_GHGI_T_4_127.refrigerants'
-            - 'EPA_GHGI_T_4_127.air_conditioning'
-            - 'EPA_GHGI_T_4_127.foams'
+            - 'EPA_GHGI_T_4_124.households'
+            - 'EPA_GHGI_T_4_124.refrigerants'
+            - 'EPA_GHGI_T_4_124.air_conditioning'
+            - 'EPA_GHGI_T_4_124.foams'
         attribution_method: proportional
         attribute_on: ['Flowable', 'SectorProducedBy']
         fill_columns: Location
@@ -563,7 +563,7 @@ source_names:
             clean_fba_before_mapping: !script_function:EPA_GHGI split_HFCs_by_type
             clean_parameter:
                 # Proportions of specific HFCs are assigned based on national total
-                flow_fba: EPA_GHGI_T_4_125
+                flow_fba: EPA_GHGI_T_4_122
             geoscale: state
             fedefl_mapping: GHGI_AR5_100
             selection_fields:
@@ -580,7 +580,7 @@ source_names:
             clean_fba_before_mapping: !script_function:EPA_GHGI split_HFCs_by_type
             clean_parameter:
                 # Proportions of specific HFCs are assigned based on national total
-                flow_fba: EPA_GHGI_T_4_125
+                flow_fba: EPA_GHGI_T_4_122
             geoscale: state
             fedefl_mapping: GHGI_AR5_100
             selection_fields:
@@ -588,7 +588,7 @@ source_names:
 
       magnesium:
         selection_fields:
-          MetaSources: 'EPA_GHGI_T_4_109'
+          MetaSources: 'EPA_GHGI_T_4_106'
         attribution_method: proportional
         attribute_on: ['Flowable', 'SectorProducedBy']
         fill_columns: Location
