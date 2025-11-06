@@ -475,3 +475,7 @@ EPA_State_GHGI,Industry - N2O from Product Uses - Other product manufacture and 
 EPA_State_GHGI,Industry - N2O from Product Uses - Other product manufacture and use - Propellant for Pressure and Aerosol Products,NAICS_2012_Code,621,,nitrous_oxide_use
 EPA_State_GHGI,Industry - N2O from Product Uses - Other product manufacture and use - Propellant for Pressure and Aerosol Products,NAICS_2012_Code,622,,nitrous_oxide_use
 EPA_State_GHGI,Industry - N2O from Product Uses - Other product manufacture and use - Propellant for Pressure and Aerosol Products,NAICS_2012_Code,623,,nitrous_oxide_use
+,"Industry - CO2 Transport, Injection, and Geological Storage - CO2 transport, injection and geologic storage - Injection and Storage - Injection",,,,
+,"Industry - CO2 Transport, Injection, and Geological Storage - CO2 transport, injection and geologic storage - Injection and Storage - Storage",,,,
+,"Industry - CO2 Transport, Injection, and Geological Storage - CO2 transport, injection and geologic storage - Transport of CO2 - Pipelines",,,,
+,Industry - Non-EOR Carbon Dioxide Utilization - Other,,,,
