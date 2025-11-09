@@ -177,17 +177,13 @@ def ghg_call(*, resp, url, year, config, **_):
     """
     with zipfile.ZipFile(io.BytesIO(resp.content), "r") as f:
         frames = []
-        if any(x in url for x in ['annex', 'Annex']):
-            opath = config['path']['annex']
-            t_tables = config['Annex']
-            annex = True
-        else:
-            opath = config['path']['base']
-            t_tables = config['Tables']
-            annex = False
+        t_tables = config['Tables'] | config['Annex']
         for chapter, tables in t_tables.items():
-            if annex:
+            if 'Annex' in chapter:
             # Annex tables are in separate folders
+              opath = config['path']['annex']
+              zfiledata0 = io.BytesIO(f.read(config['url']['annex_zip']))
+              with zipfile.ZipFile(zfiledata0, "r") as f1:
                 for table in tables:
                     # print(table)
                     df = None
@@ -199,7 +195,7 @@ def ghg_call(*, resp, url, year, config, **_):
                     path = (opath.replace('{table_name}', table_name)
                                  .replace('{annex}', chapter))
                     try:
-                        data=f.open(path)
+                        data=f1.open(path)
                     except KeyError:
                         log.error(f"error reading {table}")
                         continue
@@ -220,6 +216,9 @@ def ghg_call(*, resp, url, year, config, **_):
 
             else:
             # Access chapter specific folders within the main zip
+              opath = config['path']['base']
+              zfiledata0 = io.BytesIO(f.read(config['url']['main_zip']))
+              with zipfile.ZipFile(zfiledata0, "r") as f1:
                 for table in tables:
                     # print(table)
                     df = None
@@ -239,15 +238,11 @@ def ghg_call(*, resp, url, year, config, **_):
                                              skiprows=2, encoding="ISO-8859-1", thousands=",")
                     else:
                         try:
-                            data=f.open(path)
+                            data=f1.open(path)
                         except KeyError:
                             log.error(f"error reading {table}")
                             continue
-                    if table in ['4-118']:
-                        # Skip two rows
-                        df=pd.read_csv(data, skiprows=2, encoding="ISO-8859-1",
-                                         thousands=",", decimal=".")
-                    elif table == "3-25":
+                    if table == "3-25":
                         # Skip first row, but make headers the next 2 rows:
                         df=pd.read_csv(data, skiprows=1, encoding="ISO-8859-1",
                                          header=[0, 1], thousands=",")
@@ -895,10 +890,12 @@ if __name__ == "__main__":
                 # "A-5"
                 ]
     fba_list = []
-    for y in range(2019, 2024):
+    for y in range(2012, 2024):
         flowsa.generateflowbyactivity.main(year=y, source='EPA_GHGI')
         if y == 2023:
             ls = tbl_list + ['3-25', 'A-5']
+        elif y < 2015:
+            ls = tbl_list + ['3-25b'] # no annex table for 2012-2014
         else:
             ls = tbl_list + ['3-25b'] + [f'A-{2028-y}']
         fba = pd.concat([flowsa.getFlowByActivity(f'EPA_GHGI_T_{str(t).replace("-","_")}', y)
