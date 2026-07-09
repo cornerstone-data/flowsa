@@ -1432,7 +1432,22 @@ class _FlowBy(pd.DataFrame):
 
         fbs = self.copy()
         if not target_year:
-            target_year = int((re.search(r"\d{4}", fbs.full_name)).group())
+            # Prefer a 4-digit year in the method name (e.g. Employment_national_2023).
+            # Fall back to config year for methods without a year in the name
+            # (e.g. NIPA_FD_common, Detail_Make).
+            name_year = re.search(r"\d{4}", fbs.full_name or '')
+            if name_year:
+                target_year = int(name_year.group())
+            else:
+                target_year = fbs.config.get('year') if fbs.config else None
+            if not target_year:
+                raise ValueError(
+                    f'Unable to determine target year for temporal '
+                    f'correlation of {fbs.full_name}. Include a 4-digit '
+                    f'year in the method name or set "year" in the method '
+                    f'config.'
+                )
+            target_year = int(target_year)
         if 'TemporalCorrelation' not in fbs:
             fbs['TemporalCorrelation'] = 1
         fbs = esupy.dqi.adjust_dqi_scores(fbs, abs(fbs['Year'] - target_year),
